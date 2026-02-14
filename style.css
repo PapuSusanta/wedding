@@ -361,6 +361,20 @@ header {
     text-align: center;
 }
 
+.designation {
+    font-family: var(--font-script);
+    color: var(--gold);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.divider-small {
+    height: 2px;
+    width: 40px;
+    background: var(--gold);
+    margin: 0 auto 10px;
+}
+
 .img-wrapper {
     width: 220px;
     height: 220px;
