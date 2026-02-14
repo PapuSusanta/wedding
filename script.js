@@ -1,55 +1,56 @@
-/* Curtain Animation */
-window.onload = function () {
-    setTimeout(() => {
-        document.getElementById("intro").classList.add("open");
-        setTimeout(() => {
-            document.getElementById("intro").style.display = "none";
-        }, 1800);
-    }, 800);
-};
+// Countdown Timer Logic
+// Target Date: May 3rd, 2026 at 6:00 PM (Wedding time)
+const weddingDate = new Date("May 3, 2026 18:00:00").getTime();
 
-/* Gold Particles */
-function createParticle() {
-    const p = document.createElement("div");
-    p.classList.add("particle");
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.bottom = "-10px";
-    p.style.animationDuration = (Math.random() * 5 + 5) + "s";
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 10000);
-}
-setInterval(createParticle, 200);
+const x = setInterval(function () {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
 
-/* Petals */
-function createPetal() {
-    const petal = document.createElement("div");
-    petal.classList.add("petal");
-    petal.innerHTML = "🌸";
-    petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = (Math.random() * 6 + 5) + "s";
-    document.body.appendChild(petal);
-    setTimeout(() => petal.remove(), 10000);
-}
-setInterval(createPetal, 800);
+    // Calculate time components
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-/* Butterflies */
-function createButterfly() {
-    const b = document.createElement("div");
-    b.classList.add("butterfly");
-    b.innerHTML = "🦋";
-    b.style.left = Math.random() * 100 + "vw";
-    b.style.top = Math.random() * 60 + "vh";
-    b.style.animationDuration = (Math.random() * 6 + 6) + "s";
-    document.querySelector(".hero").appendChild(b);
-    setTimeout(() => b.remove(), 12000);
-}
-setInterval(createButterfly, 2500);
+    // Display results in the HTML elements
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minsEl = document.getElementById("minutes");
+    const secsEl = document.getElementById("seconds");
+    const countdownContainer = document.getElementById("countdown");
 
-/* Modal */
-function openModal() {
-    document.getElementById("modal").classList.add("active");
-}
+    if (daysEl && hoursEl && minsEl && secsEl) {
+        daysEl.innerHTML = days;
+        hoursEl.innerHTML = hours;
+        minsEl.innerHTML = minutes;
+        secsEl.innerHTML = seconds;
+    }
 
-function closeModal() {
-    document.getElementById("modal").classList.remove("active");
-}
+    // If the count down is finished
+    if (distance < 0) {
+        clearInterval(x);
+        if (countdownContainer) {
+            countdownContainer.innerHTML = "<h3 style='color:var(--gold); width:100%; text-align:center;'>শুভ বিবাহ সম্পন্ন!</h3>";
+        }
+    }
+}, 1000);
+
+// Scroll Reveal Animation Observer
+document.addEventListener("DOMContentLoaded", function () {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // Apply animation styles to all sections
+    document.querySelectorAll('section').forEach((el) => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(50px)';
+        el.style.transition = 'all 1s ease-out';
+        observer.observe(el);
+    });
+});
