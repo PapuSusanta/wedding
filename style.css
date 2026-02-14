@@ -1,13 +1,67 @@
-/* --- CSS Variables & Reset --- */
+/* great-vibes-regular - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Great Vibes';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/great-vibes-v21-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* cinzel-regular - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/cinzel-v26-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* cinzel-700 - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 700;
+    src: url('fonts/cinzel-v26-latin-700.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* noto-sans-bengali-regular - bengali */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Noto Sans Bengali';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/noto-sans-bengali-v33-bengali-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* noto-sans-bengali-700 - bengali */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Noto Sans Bengali';
+    font-style: normal;
+    font-weight: 700;
+    src: url('fonts/noto-sans-bengali-v33-bengali-700.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
 :root {
-    --primary-red: #8a0a0a;
-    --dark-red: #2c0303;
+    --primary-red: #a41212;
     --gold: #d4af37;
-    --light-gold: #f9eac3;
-    --text-main: #fff;
-    --text-secondary: #ffebcd;
+    --cream: #fff5e1;
+    --text-dark: #2c0303;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --font-heading: 'Cinzel', serif;
     --font-bengali: 'Noto Sans Bengali', sans-serif;
-    --font-english: 'Cinzel', serif;
     --font-script: 'Great Vibes', cursive;
 }
 
@@ -19,257 +73,359 @@
 }
 
 body {
-    font-family: var(--font-bengali);
-    background-color: var(--dark-red);
-    color: var(--text-main);
-    /* Ensure 'bg-frame.jpg' exists in the folder */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('bg-frame.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    line-height: 1.6;
+    font-family: 'Lato', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--cream);
+    background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
     overflow-x: hidden;
 }
 
-/* --- Navigation --- */
+#floating-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/* Utilities */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--primary-red);
+    border-bottom: 3px double var(--gold);
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+/* Navigation */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(44, 3, 3, 0.95);
-    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
     z-index: 1000;
+    background: rgba(164, 18, 18, 0.95);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     border-bottom: 2px solid var(--gold);
-    transition: 0.3s;
 }
 
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
+.logo {
+    font-family: var(--font-script);
+    font-size: 1.8rem;
+    color: var(--gold);
+}
+
+.heart-beat {
+    color: #fff;
+    animation: beat 1s infinite;
+    display: inline-block;
+}
+
+@keyframes beat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.nav-links {
+    list-style: none;
     display: flex;
-    justify-content: center;
     gap: 30px;
 }
 
-nav a {
-    color: var(--gold);
+.nav-links li a {
     text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 600;
+    color: #fff;
+    font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: 0.3s;
-    position: relative;
+    font-size: 0.9rem;
+    transition: color 0.3s;
 }
 
-nav a:hover::after {
-    content: '';
+.nav-links li a:hover {
+    color: var(--gold);
+}
+
+.hamburger {
+    display: none;
+    color: var(--gold);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+/* Hero Section */
+header {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 80px;
+    overflow: hidden;
+}
+
+.hero-bg {
     position: absolute;
-    bottom: -5px;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 2px;
-    background: var(--gold);
+    height: 100%;
+    background: url('assets/bg-frame.jpg') no-repeat center center/cover;
+    filter: blur(4px);
+    transform: scale(1.1);
+    z-index: 0;
 }
 
-/* --- Hero Section --- */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 120px 20px 40px;
-    position: relative;
-}
-
-.hero-frame {
-    border: 4px double var(--gold);
-    padding: 40px;
-    border-radius: 20px 20px 0 0;
-    background: rgba(138, 10, 10, 0.5);
-    backdrop-filter: blur(5px);
-    max-width: 800px;
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-content {
+    z-index: 2;
+    color: white;
+    position: relative;
+    width: 100%;
+}
+
+/* --- NEW: Spiritual Header (Mantra & Prajapati) --- */
+.spiritual-header {
+    margin-bottom: 20px;
     animation: fadeIn 2s ease;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .mantra {
+    font-family: 'Noto Sans Bengali', sans-serif;
+    color: #fdfdfd;
+    /* White/Cream */
     font-size: 1.2rem;
-    color: var(--light-gold);
-    margin-bottom: 20px;
-    font-style: italic;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
 }
 
 .praja {
+    font-family: 'Noto Sans Bengali', sans-serif;
     color: var(--gold);
-    margin-top: 10px;
+    /* Gold */
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.pre-title {
+    font-family: var(--font-script);
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 5px;
 }
 
 .main-title {
-    font-family: var(--font-script);
-    font-size: 4rem;
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.main-title span {
     color: var(--gold);
-    margin: 10px 0;
-    text-shadow: 2px 2px 4px black;
-    line-height: 1.1;
+    font-family: var(--font-script);
 }
 
-.sub-title {
-    font-size: 1.2rem;
+/* --- DATE DISPLAY --- */
+.hero-date {
+    margin-bottom: 30px;
+}
+
+.date-line {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--gold);
+    text-shadow: 1px 1px 3px #000;
     letter-spacing: 2px;
-    margin-top: 10px;
-}
-
-.date-display {
-    font-size: 1.5rem;
-    margin-top: 15px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: var(--text-secondary);
 }
 
 .bengali-date {
+    display: block;
+    font-family: var(--font-bengali);
     font-size: 1.2rem;
-    color: var(--gold);
+    color: #fff;
     margin-top: 5px;
+    opacity: 0.9;
 }
 
-/* --- Countdown Timer --- */
-.countdown {
+/* Countdown */
+.countdown-container {
     display: flex;
-    gap: 15px;
-    margin-top: 30px;
     justify-content: center;
-    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .time-box {
     background: rgba(0, 0, 0, 0.6);
-    padding: 10px;
     border: 1px solid var(--gold);
-    border-radius: 8px;
-    min-width: 70px;
-    flex: 1;
-    max-width: 100px;
+    color: var(--gold);
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 60px;
 }
 
 .time-box span {
     display: block;
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--gold);
 }
 
-.time-box label {
-    font-size: 0.8rem;
+.time-box small {
+    font-size: 0.7rem;
     text-transform: uppercase;
-    display: block;
-    margin-top: 5px;
 }
 
-/* --- Section Styling --- */
-section {
-    padding: 60px 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
+/* Poem Section */
+.section-ornament {
+    background: url("https://www.transparenttextures.com/patterns/floral-linen.png"), var(--primary-red);
     color: var(--gold);
-    margin-bottom: 40px;
+    text-align: center;
+}
+
+.poem-card {
+    border: 2px solid var(--gold);
+    padding: 30px;
+    display: inline-block;
     position: relative;
+}
+
+.bengali-text {
     font-family: var(--font-bengali);
-}
-
-.section-title::after {
-    content: '♦';
-    display: block;
     font-size: 1.5rem;
-    margin-top: 10px;
+    line-height: 1.8;
+    margin: 15px 0;
 }
 
-/* --- Couple Section --- */
-.couple-container {
+.english-translation {
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.fa-quote-left,
+.fa-quote-right {
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+/* Couple Section */
+.couple-grid {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
     gap: 30px;
+    flex-wrap: wrap;
     text-align: center;
 }
 
-.person {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 30px;
-    border-radius: 15px;
-    border: 1px solid var(--gold);
-    flex: 1;
-    min-width: 300px;
-    transition: transform 0.3s;
-}
-
-.person:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.photo-frame {
-    width: 150px;
-    height: 150px;
+.img-wrapper {
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
-    border: 3px solid var(--gold);
-    margin: 0 auto 20px;
     overflow: hidden;
-    background: #000;
+    margin: 0 auto 15px;
+    border: 5px solid var(--gold);
+    padding: 5px;
+    background: #fff;
 }
 
-.photo-frame img {
+.groom-border {
+    border-color: var(--primary-red);
+}
+
+.img-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
 }
 
-.person h3 {
-    font-size: 2rem;
-    color: var(--gold);
+.profile-card h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-red);
+    font-size: 1.8rem;
     margin-bottom: 5px;
 }
 
-.person h4 {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    font-weight: normal;
-    font-family: var(--font-english);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+/* Gathbandhan Image */
+.ampersand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
-.details-box {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    text-align: left;
-    display: inline-block;
+.gathbandhan-img {
+    width: 160px;
+    height: auto;
+    opacity: 0.9;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+    transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;
 }
 
-.details-box p {
-    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+.gathbandhan-img:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+    opacity: 1;
 }
 
-/* --- Events (Itinerary) --- */
-.timeline {
+/* Events Section (Zig-Zag) */
+.section-dark {
+    background: #2c0303;
+    color: white;
+    padding-bottom: 80px;
+}
+
+.timeline-container {
     position: relative;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.timeline::after {
+.timeline-container::after {
     content: '';
     position: absolute;
     width: 4px;
@@ -280,17 +436,26 @@ section {
     margin-left: -2px;
 }
 
-.event-card {
+.timeline-item {
     padding: 10px 40px;
     position: relative;
     background-color: inherit;
     width: 50%;
     box-sizing: border-box;
-    margin-bottom: 30px;
 }
 
-.event-card::after {
-    content: '✿';
+.timeline-item.left {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item.right {
+    left: 50%;
+    text-align: left;
+}
+
+.timeline-item::after {
+    content: '✦';
     position: absolute;
     width: 30px;
     height: 30px;
@@ -301,277 +466,255 @@ section {
     border-radius: 50%;
     z-index: 1;
     text-align: center;
-    line-height: 26px;
-    font-size: 12px;
+    line-height: 25px;
     color: var(--gold);
-}
-
-.left {
-    left: 0;
-    text-align: right;
-}
-
-.right {
-    left: 50%;
-    text-align: left;
-}
-
-.left::after {
-    right: -17px;
+    font-weight: bold;
 }
 
 .right::after {
-    left: -17px;
+    left: -16px;
 }
 
 .content {
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 6px;
-    border-left: 5px solid var(--gold);
-    color: #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--gold);
 }
 
-.content h2 {
-    color: var(--primary-red);
-    margin-bottom: 5px;
-    font-size: 1.5rem;
-}
-
-.content p {
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
-
-.content .time {
-    font-weight: bold;
-    color: #8a0a0a;
-    display: block;
-    margin-top: 5px;
-    border-top: 1px solid #ddd;
-    padding-top: 5px;
-}
-
-.content .location {
-    font-size: 0.9em;
-    color: #666;
-    font-style: italic;
-}
-
-.barjatri-note {
-    font-size: 0.9rem;
-    margin-top: 5px;
-    color: #555;
-}
-
-/* --- Invite & Venue --- */
-.invite-section {
-    background: url('bg-frame.jpg') no-repeat center center/cover;
-    position: relative;
-    text-align: center;
-    padding: 80px 20px;
-    border-top: 4px solid var(--gold);
-    border-bottom: 4px solid var(--gold);
-}
-
-.invite-overlay {
-    background: rgba(0, 0, 0, 0.85);
-    padding: 30px;
-    display: inline-block;
+.highlight-event {
+    background-color: rgba(212, 175, 55, 0.1);
     border: 2px solid var(--gold);
-    border-radius: 10px;
-    width: 100%;
-    max-width: 700px;
 }
 
-.poem {
-    font-size: 1.2rem;
-    font-style: italic;
-    margin-bottom: 20px;
-    color: var(--light-gold);
-}
-
-.invite-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
-
-.family-name {
-    font-size: 1.5rem;
-    margin-top: 15px;
-    font-family: var(--font-script);
+.content h3 {
+    font-family: var(--font-heading);
     color: var(--gold);
+    font-size: 1.4rem;
 }
 
+.bengali-desc {
+    font-family: var(--font-bengali);
+    color: #ddd;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.time-loc p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+.badge {
+    display: inline-block;
+    background: var(--primary-red);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    margin-top: 10px;
+}
+
+/* --- NEW VENUE SECTION STYLES --- */
 .venue-section {
     text-align: center;
+    padding: 80px 20px;
+    background-color: var(--cream);
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--primary-red);
+    margin-bottom: 20px;
 }
 
 .venue-intro {
-    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
 }
 
 .venue-details {
-    font-size: 1.2rem;
-    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .venue-name {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
     color: var(--gold);
-    font-size: 1.8rem;
     margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.venue-details p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-dark);
 }
 
 .venue-bengali {
-    color: var(--light-gold);
-    margin-top: 5px;
+    font-family: var(--font-bengali);
+    color: var(--primary-red);
+    margin-top: 10px;
+    font-size: 1.2rem;
 }
 
 .map-container {
-    margin-top: 30px;
+    max-width: 800px;
     height: 350px;
-    width: 100%;
-    border: 2px solid var(--gold);
+    margin: 0 auto 30px;
+    border: 3px solid var(--gold);
     border-radius: 10px;
     overflow: hidden;
 }
 
-/* --- Footer --- */
-footer {
-    background-color: #1a0000;
-    padding: 40px 20px;
-    text-align: center;
-    color: var(--text-secondary);
-    border-top: 1px solid var(--gold);
-}
-
-.footer-thankyou {
-    font-family: var(--font-script);
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    color: var(--gold);
-}
-
-.copyright {
-    margin-top: 30px;
-    font-size: 0.8rem;
-    opacity: 0.7;
-}
-
 .rsvp-btn {
-    background-color: var(--gold);
-    color: var(--dark-red);
-    padding: 15px 40px;
-    border: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25D366;
+    color: white;
+    padding: 15px 35px;
     text-decoration: none;
-    display: inline-block;
-    border-radius: 5px;
+    font-weight: bold;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
 }
 
 .rsvp-btn:hover {
-    background-color: #fff;
     transform: scale(1.05);
+    background: #20bd5a;
 }
 
-/* --- Mobile Responsive Rules --- */
-@media screen and (max-width: 768px) {
+/* Petals Animation */
+.petal {
+    position: absolute;
+    background: #d4af37;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: fall linear infinite;
+    z-index: 9999;
+}
 
-    /* Navbar */
-    .nav-container {
-        gap: 15px;
-        flex-wrap: wrap;
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+/* Footer */
+/* footer {
+    background: var(--primary-red);
+    color: var(--gold);
+    text-align: center;
+    padding: 30px;
+    border-top: 5px solid var(--gold);
+} */
+
+/* --- UPDATED FOOTER STYLES --- */
+footer {
+    background: var(--primary-red);
+    color: var(--cream);
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 5px double var(--gold);
+}
+
+.footer-thankyou {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+footer p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 20px;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    padding-top: 15px;
+    display: inline-block;
+    width: 60%;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .timeline-container::after {
+        left: 31px;
     }
 
-    nav a {
-        font-size: 0.9rem;
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
     }
 
-    /* Hero */
-    .hero-frame {
-        padding: 20px;
-        width: 95%;
+    .timeline-item.left,
+    .timeline-item.right {
+        left: 0;
+        text-align: left;
+    }
+
+    .timeline-item.left::after,
+    .timeline-item.right::after {
+        left: 15px;
+    }
+
+    .nav-links {
+        position: absolute;
+        right: 0;
+        top: 60px;
+        background: rgba(164, 18, 18, 0.98);
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+    }
+
+    .hamburger {
+        display: block;
     }
 
     .main-title {
         font-size: 2.5rem;
     }
 
-    .date-display {
-        font-size: 1.2rem;
+    .hero-bg {
+        background-position: center top;
     }
 
-    /* Couple */
-    .person {
-        min-width: 100%;
-        padding: 20px;
+    .gathbandhan-img {
+        width: 120px;
+        margin: 20px 0;
     }
 
-    .person h3 {
-        font-size: 1.6rem;
-    }
-
-    /* Timeline */
-    .timeline::after {
-        left: 20px;
-    }
-
-    .event-card {
-        width: 100%;
-        padding-left: 50px;
-        padding-right: 10px;
-        text-align: left;
-    }
-
-    /* Reset left/right specific styles for mobile */
-    .left,
-    .right {
-        left: 0;
-    }
-
-    .left::after,
-    .right::after {
-        left: 5px;
-        right: auto;
-    }
-
-    /* Misc */
-    .section-title {
-        font-size: 2rem;
-    }
-
-    .invite-overlay {
-        padding: 20px;
-    }
-
-    .poem {
+    .mantra {
         font-size: 1rem;
     }
 
-    .time-box {
-        min-width: 60px;
-        padding: 5px;
+    .praja {
+        font-size: 1.4rem;
     }
 
-    .time-box span {
-        font-size: 1.2rem;
-    }
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .footer-thankyou {
+        font-size: 2.5rem;
     }
 }

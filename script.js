@@ -1,56 +1,74 @@
-// Countdown Timer Logic
-// Target Date: May 3rd, 2026 at 6:00 PM (Wedding time)
+// 1. Mobile Menu Toggle
+function toggleMenu() {
+    const navLinks = document.getElementById('nav-links');
+    navLinks.classList.toggle('active');
+}
+
+// 2. Countdown Timer
+// Target Date: May 3rd, 2026 at 6:00 PM
 const weddingDate = new Date("May 3, 2026 18:00:00").getTime();
 
-const x = setInterval(function () {
+setInterval(function () {
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
-    // Calculate time components
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Display results in the HTML elements
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minsEl = document.getElementById("minutes");
-    const secsEl = document.getElementById("seconds");
-    const countdownContainer = document.getElementById("countdown");
-
-    if (daysEl && hoursEl && minsEl && secsEl) {
-        daysEl.innerHTML = days;
-        hoursEl.innerHTML = hours;
-        minsEl.innerHTML = minutes;
-        secsEl.innerHTML = seconds;
-    }
-
-    // If the count down is finished
-    if (distance < 0) {
-        clearInterval(x);
-        if (countdownContainer) {
-            countdownContainer.innerHTML = "<h3 style='color:var(--gold); width:100%; text-align:center;'>শুভ বিবাহ সম্পন্ন!</h3>";
-        }
+    const d = document.getElementById("days");
+    if (d) {
+        d.innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
     }
 }, 1000);
 
-// Scroll Reveal Animation Observer
-document.addEventListener("DOMContentLoaded", function () {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1 });
+// 3. Falling Petals Animation (Bug Free)
+function createPetal() {
+    const container = document.getElementById('floating-container');
+    // Safety check: if container missing, stop
+    if (!container) return;
 
-    // Apply animation styles to all sections
-    document.querySelectorAll('section').forEach((el) => {
-        el.style.opacity = 0;
-        el.style.transform = 'translateY(50px)';
-        el.style.transition = 'all 1s ease-out';
-        observer.observe(el);
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+
+    const size = Math.random() * 10 + 5;
+    const left = Math.random() * 100;
+    const duration = Math.random() * 5 + 5;
+
+    petal.style.width = `${size}px`;
+    petal.style.height = `${size}px`;
+    petal.style.left = `${left}vw`;
+    petal.style.animationDuration = `${duration}s`;
+
+    // Vary colors between Gold and Red
+    if (Math.random() > 0.5) {
+        petal.style.backgroundColor = '#d4af37';
+    } else {
+        petal.style.backgroundColor = '#a41212';
+    }
+
+    container.appendChild(petal);
+    setTimeout(() => { petal.remove(); }, duration * 1000);
+}
+setInterval(createPetal, 400);
+
+// 4. Scroll Animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+        }
     });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.hero-content, .profile-card, .timeline-item, .poem-card').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'all 0.8s ease-out';
+    observer.observe(el);
 });
